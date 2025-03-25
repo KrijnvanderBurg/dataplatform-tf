@@ -17,6 +17,6 @@ resources:
       name: .azuredevops
 
 extends:
-  template: /.azuredevops/v1/templates/stages/opentofu/validate_and_plan.yml@templatesRepo
+  template: /.azuredevops/v1/templates/stages/opentofu/validate_and_plan.yml@.azuredevops
   parameters:
     openTofuDir: $(Build.Repository.LocalPath)/dataplatform-tf/
