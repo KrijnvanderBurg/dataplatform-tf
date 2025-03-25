@@ -11,7 +11,7 @@ trigger:
 resources:
   repositories:
     - repository: .azuredevops
-      type: git
+      type: github
       ref: main
       name: .azuredevops
 
