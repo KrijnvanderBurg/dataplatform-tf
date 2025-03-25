@@ -3,40 +3,19 @@ trigger:
     include:
       - main
   paths:
+    include:
+      - "**/*.tf"
     exclude:
       - README.md
 
-stages:
-  - stage: Validate
-    displayName: Validate
-    variables:
-      - template: /.azuredevops/v1/variables/environments/shared.yml
-    jobs:
-      - job: ValidateOpenTofu
-        displayName: Validate OpenTofu
-        pool:
-          vmImage: ubuntu-latest
-        steps:
-          - checkout: self
-            fetchDepth: 0
+resources:
+  repositories:
+    - repository: .azuredevops
+      type: git
+      ref: main
+      name: .azuredevops
 
-          - template: /.azuredevops/v1/templates/opentofu_install.yml
-
-          - template: /.azuredevops/v1/templates/opentofu_init.yml
-            parameters:
-              openTofuDir: $(Build.Repository.LocalPath)/lakehouse/environments/dev/
-        
-          - template: /.azuredevops/v1/templates/opentofu_validate.yml
-            parameters:
-              openTofuDir: $(Build.Repository.LocalPath)/lakehouse/environments/dev/
-
-          - template: /.azuredevops/v1/templates/opentofu_plan.yml
-            parameters:
-              openTofuDir: $(Build.Repository.LocalPath)/lakehouse/environments/dev/
-
-          - template: /.azuredevops/v1/templates/opentofu_apply.yml
-            parameters:
-              openTofuPlanFilepath: $(Build.Repository.LocalPath)/lakehouse/environments/dev/
-          # - publish: ${{ variables.pythonSrcDirectory }}
-          #   displayName: Publish artifact module
-          #   artifact: module
+extends:
+  template: /.azuredevops/v1/templates/stages/opentofu/validate_and_plan.yml@templatesRepo
+  parameters:
+    openTofuDir: $(Build.Repository.LocalPath)/dataplatform-tf/
