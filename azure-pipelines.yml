@@ -19,4 +19,6 @@ resources:
 extends:
   template: /v1/pipelines/opentofu.yml@.azuredevops
   parameters:
-    openTofuDir: $(Build.Repository.LocalPath)/dataplatform-tf/
+    openTofuDir: $(Build.Repository.LocalPath)/dataplatform-tf/environments/dev/
+    openTofuPlanFilepath: plan.out
+  
