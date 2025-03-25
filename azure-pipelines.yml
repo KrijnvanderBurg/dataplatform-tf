@@ -16,7 +16,6 @@ resources:
       ref: main
       name: KrijnvanderBurg/.azuredevops
 
-
 extends:
   template: /v1/pipelines/opentofu.yml@.azuredevops
   parameters:
