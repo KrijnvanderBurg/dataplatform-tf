@@ -9,6 +9,6 @@ trigger:
       - README.md
 
 extends:
-  template: /.azuredevops/v1/pipelines/opentofu/validate_and_plan.yml
+  template: /.azuredevops/v1/pipelines/opentofu.yml
   parameters:
     openTofuDir: $(Build.Repository.LocalPath)/dataplatform-tf/
