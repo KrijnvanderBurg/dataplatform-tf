@@ -8,15 +8,7 @@ trigger:
     exclude:
       - README.md
 
-resources:
-  repositories:
-    - repository: .azuredevops
-      type: github
-      endpoint: KrijnvanderBurg
-      ref: main
-      name: KrijnvanderBurg/.azuredevops
-
 extends:
-  template: /v1/templates/stages/opentofu/validate_and_plan.yml@.azuredevops
+  template: /.azuredevops/v1/templates/stages/opentofu/validate_and_plan.yml
   parameters:
     openTofuDir: $(Build.Repository.LocalPath)/dataplatform-tf/
